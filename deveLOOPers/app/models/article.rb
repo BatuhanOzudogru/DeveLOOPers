@@ -1,12 +1,13 @@
 class Article < ApplicationRecord
     enum status: {unpublished:0,published:1}
-
-    after_initialize :set_defaiult_status, if: :new_record?
+    validates :title, presence:true, uniqueness: true
+    validates :content, presence: true
+    after_initialize :set_default_status, if: :new_record?
 
     private
 
-    def set_defaiult_status
-        selt.status ||= :unpublished
+    def set_default_status
+        self.status ||= :unpublished
     end
     
 end
