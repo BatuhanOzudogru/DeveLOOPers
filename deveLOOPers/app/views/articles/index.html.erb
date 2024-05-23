@@ -21,7 +21,11 @@
     <p class="my-5">
       <strong class="block font-extralight mb-1">Created at <%= article.created_at.strftime("%Y-%m-%d | %A") %></strong>
     </p>
-    <p>
+    <p class="my-5">
+    <strong class="font-bold text-l <%= article.unpublished? ? 'text-red-500' : 'text-green-500' %>">
+    <%= article.status == 'unpublished' ? 'Draft' : 'Published' %>
+      </strong>
+    </p>
       <%= link_to "Show this article", article, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </p>
     <hr>
