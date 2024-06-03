@@ -3,9 +3,19 @@
     <strong class="block font-medium mb-1">Title:</strong>
     <%= article.title %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Content:</strong>
     <%= article.content %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Is published:</strong>
+    <%= article.published %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Vote Count:</strong>
+    <%= article.vote_count %>
+    <%= button_to "Add vote", article_add_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block" %>
   </p>
 </div>

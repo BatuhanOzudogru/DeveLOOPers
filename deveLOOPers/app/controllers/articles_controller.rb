@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    before_action :check_published, only: [:edit, :update, :destroy]
+   
 
     def index
-      @articles = Article.all
+      @articles = Article.published.order(created_at: :asc)
     end
   
     def show
@@ -38,6 +38,14 @@ class ArticlesController < ApplicationController
     def destroy
       @article.destroy
       redirect_to articles_url, notice: 'Article was successfully destroyed.'
+    end
+
+    def add_vote
+      article = Article.find(params[:article_id])
+      article.vote_count += 1
+      article.save
+  
+      redirect_to articles_path(article)
     end
   
     private

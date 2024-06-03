@@ -1,7 +1,7 @@
 <!-- app/views/welcome/index.html.erb -->
 <div class="flex flex-col mx-auto">
-  <h1 class="font-bold text-4xl">Welcome deveLOOPers</h1>
-  <p class="mt-5">You can reach All Articles <%= link_to "here", articles_path, class: "text-sky-400" %></p>
+  <h1 class="font-bold text-4xl">Welcome deveL∞Pers</h1>
+  <p class="mt-5">You can see <%= pluralize(@articles.count, "published article") %> <%= link_to "here", articles_path, class:"text-sky-400" %></p>
 </div>
 
 <div class="mt-10">
