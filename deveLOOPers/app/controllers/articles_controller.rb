@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
     def index
       @articles = Article.published.order(created_at: :asc)
+      @articles = current_user.articles.published
     end
   
     def show
@@ -18,7 +19,8 @@ class ArticlesController < ApplicationController
     end
   
     def create
-      @article = Article.new(article_params)
+      #@article = Article.new(article_params)
+      @article = current_user.articles.build(article_params)
   
       if @article.save
         redirect_to @article, notice: 'Article was successfully created.'
