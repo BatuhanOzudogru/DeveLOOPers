@@ -3,11 +3,42 @@
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
+
     <%= render @article %>
+
     <%= link_to "Edit this article", edit_article_path(@article), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
     <%= link_to "Back to articles", articles_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    
     <div class="inline-block ml-2">
-      <%= button_to "Destroy this article", @article, method: :delete, class: "bg-red-200 text-red-500 mt-2 rounded-lg py-3 px-5 font-medium" %>
+      <%= button_to "Destroy this article", @article, method: :delete, 
+      class: "bg-red-200 text-red-500 mt-2 rounded-lg py-3 px-5 font-medium" %>
     </div>
+    <hr>
+    <div>
+      <h2 class="font-bold text-2xl">Comments (<%=  @article.comments.count %>)</h1>
+      <% @article.comments.each do |comment| %>
+        <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow">
+          <p class="my-5">
+            <strong class="block font-medium mb-1">Commenter:</strong>
+            <%= comment.commenter %>
+          </p>
+          <p class="my-5">
+            <strong class="block font-medium mb-1">Body:</strong>
+            <%= comment.body %>
+          </p>
+        </div>
+      <% end %>
+      <%= form_with model: [ @article, @article.comments.build ], class: "mt-5" do |form| %>
+        <p>
+          <%= form.label :body %><br>
+          <%= form.text_area :body, rows: 4 %>
+        </p>
+        <p>
+          <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        </p>
+      <% end %>
+    </div>
+      
   </div>
 </div>

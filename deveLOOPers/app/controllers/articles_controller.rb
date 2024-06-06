@@ -49,6 +49,14 @@ class ArticlesController < ApplicationController
   
       redirect_to articles_path(article)
     end
+
+    def remove_vote
+      article = Article.find(params[:article_id])
+      article.vote_count -= 1
+      article.save
+
+      redirect_to articles_path(article)
+    end
   
     private
   

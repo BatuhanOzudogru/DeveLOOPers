@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'welcome/index'
   resources :articles do
     post "/add_vote", to: "articles#add_vote"
+    post "/remove_vote", to: "articles#remove_vote"
+
+    resources :comments, only: [:create]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

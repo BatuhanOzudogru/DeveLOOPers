@@ -16,6 +16,11 @@
   <p class="my-5">
     <strong class="block font-medium mb-1">Vote Count:</strong>
     <%= article.vote_count %>
-    <%= button_to "Add vote", article_add_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block" %>
+    
+      <%= button_to "Add vote", article_add_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
+      <% unless article.vote_count.zero? %>
+       <%= button_to "Remove vote", article_remove_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
+      <% end %>  
+    
   </p>
 </div>
