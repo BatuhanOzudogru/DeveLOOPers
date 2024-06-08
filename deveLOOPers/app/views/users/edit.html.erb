@@ -1,0 +1,25 @@
+<h1 class="font-bold text-4xl">Edit Profile</h1>
+
+<%= form_with(model: @user, url: user_profile_path(@user), method: :patch) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this profile from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nickname %>
+    <%= form.text_field :nickname %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Update Profile', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Profile', user_profile_path(@user), class: "btn btn-secondary" %>

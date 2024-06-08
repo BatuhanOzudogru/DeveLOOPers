@@ -1,17 +1,39 @@
-<h1 class="text-3xl font-bold mb-4"><%= @user.nickname %>'s Profile</h1>
-<p class="text-lg mb-6">Email: <%= @user.email %></p>
+<div class="mt-10">
+  <h1 class="text-3xl font-bold mb-4"><%= @user.nickname %>'s Profile</h1>
+  <p class="text-lg mb-6">Email: <%= @user.email %></p>
 
-<h2 class="text-2xl font-semibold mb-4">Pending Comments</h2>
-<% @pending_comments.each do |comment| %>
-  <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-    <p class="text-gray-700 mb-2"><%= comment.body %></p>
-    <p class="text-gray-500 mb-4">
-      Article: 
-      <%= link_to comment.article.title, article_path(comment.article), class: "text-blue-500 hover:underline" %>
-    </p>
-    <div class="flex space-x-2">
-      <%= link_to "Approve", approve_article_comment_path(comment.article, comment), method: :put, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :put } %>
-      <%= link_to "Reject", reject_article_comment_path(comment.article, comment), method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :delete } %>
+  <% if user_signed_in? && current_user == @user %>
+    <div class="text-center">
+      <%= link_to 'Edit Profile', edit_user_profile_path(current_user.nickname), class: "btn btn-primary inline-block rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
     </div>
-  </div>
-<% end %>
+  <% end %>
+
+  <h2 class="text-2xl font-semibold mb-4">Published Articles</h2>
+  <ul class="mt-5 space-y-2">
+    <% @published_articles.each do |article| %>
+      <li class="border-b border-gray-200 pb-3">
+        <h3 class="text-xl font-semibold mb-2"><%= link_to article.title, article_path(article), class: "text-blue-600 underline" %></h3>
+        <div>
+          <% article.tags.each do |tag| %>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#<%= tag.name %></span>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-4">Pending Comments</h2>
+  <% @pending_comments.each do |comment| %>
+    <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+      <p class="text-gray-700 mb-2"><%= comment.body %></p>
+      <p class="text-gray-500 mb-4">
+        Article: 
+        <%= link_to comment.article.title, article_path(comment.article), class: "text-blue-500 hover:underline" %>
+      </p>
+      <div class="flex space-x-2">
+        <%= link_to "Approve", approve_article_comment_path(comment.article, comment), method: :put, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :put } %>
+        <%= link_to "Reject", reject_article_comment_path(comment.article, comment), method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :delete } %>
+      </div>
+    </div>
+  <% end %>
+</div>

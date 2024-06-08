@@ -8,8 +8,7 @@
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl text-blue-800">Articles <%= @articles.count %></h1>
     <% if user_signed_in? %>
-     
-    <%= link_to "Add new article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      <a href="<%= new_article_path %>" class="rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium">Add new article</a>
     <% end %>
   </div>
 
@@ -24,8 +23,7 @@
         <p class="my-5">
           <strong class="block font-extralight mb-1">Created at <%= article.created_at.strftime("%Y-%m-%d | %A") %></strong>
         </p>
-        <%= link_to "Show this article", article, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-        
+        <a href="<%= article_path(article) %>" class="ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium">Show this article</a>
       </div>
     <% end %>
   </div>

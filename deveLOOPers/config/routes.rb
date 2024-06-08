@@ -19,5 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/users/:id', to: 'users#show', as: 'user_profile'
+  get '/users/:nickname', to: 'users#show', as: 'user_profile'
+  get '/users/:nickname/edit', to: 'users#edit', as: 'edit_user_profile'
+  patch '/users/:nickname', to: 'users#update'
+
 end
