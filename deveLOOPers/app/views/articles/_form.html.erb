@@ -27,9 +27,13 @@
 
   <div class="field">
     <%= form.label :tags %><br>
-    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |cb| %>
-      <%= cb.label { cb.check_box + cb.text } %><br>
+    <%# Checkboxes for existing tags %>
+    <% Tag.all.each do |tag| %>
+      <%= form.check_box :tag_ids, { multiple: true }, tag.id, nil %>
+      <%= tag.name %><br>
     <% end %>
+    <%# Text field for creating new tags %>
+    <%= form.text_field :new_tags, placeholder: "Enter new tags separated by commas" %>
   </div>
 
   <div class="actions">

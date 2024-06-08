@@ -7,7 +7,10 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl text-blue-800">Articles <%= @articles.count %></h1>
+    <% if user_signed_in? %>
+     
     <%= link_to "Add new article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <% end %>
   </div>
 
   <div id="articles" class="flex flex-wrap">
@@ -22,10 +25,7 @@
           <strong class="block font-extralight mb-1">Created at <%= article.created_at.strftime("%Y-%m-%d | %A") %></strong>
         </p>
         <%= link_to "Show this article", article, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-        <% unless article.published? %>
-          <%= link_to "Edit", edit_article_path(article), class: "ml-2 rounded-lg py-3 px-5 bg-yellow-600 text-white inline-block font-medium" %>
-          <%= link_to "Destroy", article, method: :delete, data: { confirm: "Are you sure?" }, class: "ml-2 rounded-lg py-3 px-5 bg-red-600 text-white inline-block font-medium" %>
-        <% end %>
+        
       </div>
     <% end %>
   </div>

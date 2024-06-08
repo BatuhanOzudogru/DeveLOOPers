@@ -5,9 +5,13 @@ class Comment < ApplicationRecord
   belongs_to :article
   belongs_to :user
 
+
+
   def written_by?(current_user)
     user == current_user
   end
+
+
 
 
 end
