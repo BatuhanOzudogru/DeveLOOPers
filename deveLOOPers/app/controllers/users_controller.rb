@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @pending_comments = Comment.joins(:article).where(articles: { user_id: @user.id }, state: 'pending')
+    @pending_comments = Comment.joins(article: :user).where(users: { id: @user.id }, comments: { state: 'pending' })
+
     if @user
       @articles = @user.articles
     else

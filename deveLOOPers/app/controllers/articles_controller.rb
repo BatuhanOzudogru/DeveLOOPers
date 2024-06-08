@@ -7,6 +7,26 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
+  @comment = Comment.new # Yeni bir yorum oluşturmak için gerekli
+
+  # Article'ın onaylanmış yorumlarını al
+  @approved_comments = @article.comments.approved
+
+  # Yalnızca mevcut kullanıcıya ait veya henüz onaylanmamış yorumları al
+  @user_comments = @article.comments.where(user: current_user).or(@article.comments.pending)
+
+  # Yorumların listesini göstermek için
+  @comment_list = @approved_comments + @user_comments
+
+  # Yalnızca makale sahibi veya yazarın henüz onaylanmamış yorumlarını al
+  @pending_comments = @article.comments.pending.where(user: @article.user)
+
+  # Eğer kullanıcı makale sahibi veya yazarı ise
+  if current_user == @article.user
+    # Yalnızca onay bekleyen yorumları al
+    @pending_comments = @article.comments.pending
+  end
   end
 
   def new

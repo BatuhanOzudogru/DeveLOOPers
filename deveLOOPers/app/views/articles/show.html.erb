@@ -3,6 +3,12 @@
     <strong class="block font-medium mb-1">Title:</strong>
     <%= @article.title %>
   </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Publisher:</strong>
+    <%= @article.user.nickname %>
+  </p>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Content:</strong>
     <%= @article.content %>
@@ -40,28 +46,35 @@
   <hr>
 
   <div>
-    <h2 class="font-bold text-2xl">Comments (<%=  @article.comments.approved.count %>)</h2>
-    <% @article.comments.approved.each do |comment| %>
-      <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow">
-        <p class="my-5">
-          <strong class="block font-medium mb-1">Commenter:</strong>
-          <%= comment.user.nickname %>
-        </p>
-        <p class="my-5">
-          <strong class="block font-medium mb-1">Body:</strong>
-          <%= comment.body %>
-        </p>
-      </div>
-    <% end %>
+  <h2 class="font-bold text-2xl">Comments (<%= @article.comments.approved.count %>)</h2>
+  <% @article.comments.each do |comment| %>
+    <% if comment.user == current_user || current_user == @article.user || comment.state == "approved" %>
+    <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow relative">
+    <div class="absolute top-0 right-0 p-2 bg-gray-100 rounded-bl-lg text-sm font-semibold text-gray-700">
+      <%= comment.state.capitalize %>
+    </div>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Commenter:</strong>
+      <%= comment.user.nickname %>
+    </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Body:</strong>
+      <%= comment.body %>
+    </p>
   </div>
-
-  <%= form_with model: [ @article, @article.comments.build ], class: "mt-5" do |form| %>
-    <p>
-      <%= form.label :body %><br>
-      <%= form.text_area :body, rows: 4 %>
-    </p>
-    <p>
-      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-    </p>
+  
+    <% end %>
   <% end %>
+
+ <%= form_with(model: [ @article, @comment ], class: "mt-5") do |form| %>
+  <%= form.hidden_field :commenter, value: current_user.nickname %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body, rows: 4 %>
+  </p>
+  <p>
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </p>
+<% end %>
 </div>
+
