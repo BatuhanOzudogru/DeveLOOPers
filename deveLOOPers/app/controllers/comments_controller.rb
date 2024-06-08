@@ -5,14 +5,22 @@ class CommentsController < ApplicationController
         @article = Article.find(params[:article_id])
         @comment = @article.comments.new(comment_params)
         @comment.user = current_user
-        @comment.commenter = current_user.email
+        
+
         if @comment.save
             redirect_to article_path(@article), notice: 'Comment was successfully created.'
           else
             redirect_to article_path(@article), alert: 'Error creating comment.'
-        end
+        end  
+    end
+
+    def destroy
+        article = Article.find(params[:article_id])
+        comment = article.comments.find(params[:id])
     
-        
+        comment.destroy if comment.written_by?(current_user)
+    
+        redirect_to article_path(article)
       end
 
     private

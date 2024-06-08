@@ -1,0 +1,10 @@
+<h1><%= @user.nickname %>'s Profile</h1>
+<p>Email: <%= @user.email %></p>
+<h2>Articles</h2>
+<div>
+  <% @user.articles.published.each do |article| %>
+    <h2><%= link_to article.title, article_path(article) %></h2>
+    <p><%= article.content %></p>
+    <p>Tags: <%= article.tags.map(&:name).join(", ") %></p>
+  <% end %>
+</div>

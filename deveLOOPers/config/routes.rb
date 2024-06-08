@@ -2,17 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
   resources :articles do
-    post "/add_vote", to: "articles#add_vote"
-    post "/remove_vote", to: "articles#remove_vote"
-
-    resources :comments, only: [:create]
+    member do
+      post 'add_vote'
+      post 'remove_vote'
+    end
+    resources :comments, only: [:create, :destroy]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
+  get '/users/:id', to: 'users#show', as: 'user_profile'
   root "welcome#index"
 end

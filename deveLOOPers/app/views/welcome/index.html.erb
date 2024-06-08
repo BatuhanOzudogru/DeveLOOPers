@@ -1,12 +1,18 @@
 <!-- app/views/welcome/index.html.erb -->
-<div class="flex flex-col mx-auto">
-  <h1 class="font-bold text-4xl">Welcome deveL∞Pers</h1>
-  <p class="mt-5">You can see <%= pluralize(@articles.count, "published article") %> <%= link_to "here", articles_path, class:"text-sky-400" %></p>
+<div class="flex flex-col mx-auto items-center text-center">
+  <h1 class="font-bold text-4xl mt-10">Welcome deveL∞Pers</h1>
+  <p class="mt-5">You can see <%= pluralize(@articles.count, "published article") %> <%= link_to "here", articles_path, class:"text-sky-400 underline" %></p>
 </div>
+<% if user_signed_in? %>
+  <%= link_to "My Profile", user_profile_path(current_user.id), class: "btn btn-primary" %>
+<% end %>
+
+
+
 
 <div class="mt-10">
   <h2 class="font-bold text-2xl">Published Articles</h2>
-  <ul class="mt-5">
+  <ul class="mt-5 space-y-2">
     <% @articles.each do |article| %>
       <li>
         <%= link_to article.title, article_path(article), class: "text-blue-600 underline" %>
@@ -15,6 +21,6 @@
   </ul>
 </div>
 
-<div class="mt-10">
+<div class="mt-10 text-center">
   <%= link_to "Add new article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium" %>
 </div>
