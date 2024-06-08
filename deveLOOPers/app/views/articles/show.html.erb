@@ -1,4 +1,3 @@
-
 <div id="<%= dom_id @article %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Title:</strong>
@@ -13,54 +12,56 @@
     <strong class="block font-medium mb-1">Is published:</strong>
     <%= @article.published %>
   </p>
+
   <div>
-  <h2 class="font-bold text-2xl">Tags</h2>
-  <% @article.tags.each do |tag| %>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#<%= tag.name %></span>
-  <% end %>
-</div>
+    <h2 class="font-bold text-2xl">Tags</h2>
+    <% @article.tags.each do |tag| %>
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#<%= tag.name %></span>
+    <% end %>
+  </div>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Vote Count:</strong>
     <%= @article.vote_count %>
-    
-    <%= button_to "Add vote", add_vote_article_path(@article), method: :article, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
+
+    <%= button_to "Add vote", add_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
     <% unless @article.vote_count.zero? %>
-      <%= button_to "Remove vote", remove_vote_article_path(@article), method: :article, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
+      <%= button_to "Remove vote", remove_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
     <% end %>
   </p>
+
   <div class="inline-block ml-2">
     <% if @article.user == current_user %>
       <%= link_to "Edit", edit_article_path(@article), class: "ml-2 rounded-lg py-3 px-5 bg-yellow-600 text-white inline-block font-medium" %>
       <%= button_to "Destroy this article", @article, method: :delete, class: "bg-red-200 text-red-500 mt-2 rounded-lg py-3 px-5 font-medium" %>
     <% end %>
-    </div>
-    
-    <hr>
-    <div>
-      <h2 class="font-bold text-2xl">Comments (<%=  @article.comments.count %>)</h1>
-      <% @article.comments.each do |comment| %>
-        <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow">
-          <p class="my-5">
-            <strong class="block font-medium mb-1">Commenter:</strong>
-            <%= comment.user.nickname %>
-          </p>
-          <p class="my-5">
-            <strong class="block font-medium mb-1">Body:</strong>
-            <%= comment.body %>
-          </p>
-        </div>
-      <% end %>
-      <%= form_with model: [ @article, @article.comments.build ], class: "mt-5" do |form| %>
-        <p>
-          <%= form.label :body %><br>
-          <%= form.text_area :body, rows: 4 %>
-        </p>
-        <p>
-          <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-        </p>
-      <% end %>
-    </div>
+  </div>
 
-</div>
+  <hr>
+
+  <div>
+    <h2 class="font-bold text-2xl">Comments (<%=  @article.comments.approved.count %>)</h2>
+    <% @article.comments.approved.each do |comment| %>
+      <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow">
+        <p class="my-5">
+          <strong class="block font-medium mb-1">Commenter:</strong>
+          <%= comment.user.nickname %>
+        </p>
+        <p class="my-5">
+          <strong class="block font-medium mb-1">Body:</strong>
+          <%= comment.body %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with model: [ @article, @article.comments.build ], class: "mt-5" do |form| %>
+    <p>
+      <%= form.label :body %><br>
+      <%= form.text_area :body, rows: 4 %>
+    </p>
+    <p>
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    </p>
+  <% end %>
 </div>

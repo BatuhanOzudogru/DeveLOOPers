@@ -1,10 +1,17 @@
-<h1><%= @user.nickname %>'s Profile</h1>
-<p>Email: <%= @user.email %></p>
-<h2>Articles</h2>
-<div>
-  <% @user.articles.published.each do |article| %>
-    <h2><%= link_to article.title, article_path(article) %></h2>
-    <p><%= article.content %></p>
-    <p>Tags: <%= article.tags.map(&:name).join(", ") %></p>
-  <% end %>
-</div>
+<h1 class="text-3xl font-bold mb-4"><%= @user.nickname %>'s Profile</h1>
+<p class="text-lg mb-6">Email: <%= @user.email %></p>
+
+<h2 class="text-2xl font-semibold mb-4">Pending Comments</h2>
+<% @pending_comments.each do |comment| %>
+  <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+    <p class="text-gray-700 mb-2"><%= comment.body %></p>
+    <p class="text-gray-500 mb-4">
+      Article: 
+      <%= link_to comment.article.title, article_path(comment.article), class: "text-blue-500 hover:underline" %>
+    </p>
+    <div class="flex space-x-2">
+      <%= link_to "Approve", approve_article_comment_path(comment.article, comment), method: :put, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :put } %>
+      <%= link_to "Reject", reject_article_comment_path(comment.article, comment), method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded", data: { turbo_method: :delete } %>
+    </div>
+  </div>
+<% end %>
