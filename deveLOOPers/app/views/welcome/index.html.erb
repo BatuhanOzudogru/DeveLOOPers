@@ -1,20 +1,20 @@
 <div class="flex justify-center">
   <div class="flex flex-col mx-auto items-center text-center">
-    <h1 class="font-bold text-4xl mt-10">Welcome deveL∞Pers</h1>
-    <p class="mt-5 text-lg">You can see <%= pluralize(@articles.count, "published article") %> <%= link_to "here", articles_path, class:"text-sky-400 underline" %></p>
+    <h1 class="font-bold text-4xl mt-10"><%= t('welcome') %></h1>
+    <p class="mt-5 text-lg"><%= t('see_articles', count: @articles.count) %> <%= link_to t('here'), articles_path, class: "text-sky-400 underline" %></p>
 
     <% if user_signed_in? %>
       <div class="mt-10 text-center">
-        <%= link_to "Add new article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium" %>
+        <%= link_to t('add_new_article'), new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium" %>
       </div>
       <div class="text-center mt-5">
-        <%= link_to "My Profile", user_profile_path(current_user.nickname), class: "btn btn-primary inline-block rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
+        <%= link_to t('my_profile'), user_profile_path(current_user.nickname), class: "btn btn-primary inline-block rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
       </div>
     <% end %>
   </div>
 
   <div class="mt-10 ml-10">
-    <h2 class="font-bold text-2xl">Published Articles</h2>
+    <h2 class="font-bold text-2xl"><%= t('published_articles') %></h2>
     <ul class="mt-5 space-y-2">
       <% @articles.each do |article| %>
         <li class="border-b border-gray-200 pb-3">

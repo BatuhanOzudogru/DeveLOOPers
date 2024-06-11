@@ -1,26 +1,26 @@
-<div id="<%= dom_id article %>">
+<div id="<%= dom_id(article) %>">
   <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.title') %>:</strong>
     <%= article.title %>
   </p>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.content') %>:</strong>
     <%= article.content %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Is published:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.is_published') %>:</strong>
     <%= article.published %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Vote Count:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.vote_count') %>:</strong>
     <%= article.vote_count %>
     
-      <%= button_to "Add vote", article_add_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
-      <% unless article.vote_count.zero? %>
-       <%= button_to "Remove vote", article_remove_vote_path(article), method: :article, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
-      <% end %>  
+    <%= button_to t('articles.add_vote'), add_vote_article_path(article), method: :post, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
+    <% unless article.vote_count.zero? %>
+      <%= button_to t('articles.remove_vote'), remove_vote_article_path(article), method: :post, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
+    <% end %>  
     
   </p>
 </div>

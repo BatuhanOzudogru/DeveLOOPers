@@ -1,7 +1,7 @@
 <%= form_with(model: @article) do |form| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <h2><%= pluralize(@article.errors.count, t('articles.error')) %> <%= t('articles.prohibited') %>:</h2>
       <ul>
         <% @article.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -11,32 +11,32 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, t('articles.title') %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :content, t('articles.content') %>
     <%= form.rich_text_area :content %>
   </div>
 
   <div class="field">
-    <%= form.label :published %>
+    <%= form.label :published, t('articles.published') %>
     <%= form.check_box :published %>
   </div>
 
   <div class="field">
-    <%= form.label :tags %><br>
+    <%= form.label :tags, t('articles.tags') %><br>
     <%# Checkboxes for existing tags %>
     <% Tag.all.each do |tag| %>
       <%= form.check_box :tag_ids, { multiple: true }, tag.id, nil %>
       <%= tag.name %><br>
     <% end %>
     <%# Text field for creating new tags %>
-    <%= form.text_field :new_tags, placeholder: "Enter new tags separated by commas" %>
+    <%= form.text_field :new_tags, placeholder: t('articles.new_tags_placeholder') %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t('articles.create_article'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
   </div>
 <% end %>

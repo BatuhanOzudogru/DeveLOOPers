@@ -1,31 +1,56 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
+  logged_in_as: "Logged in as"
+  logout: "Logout"
+  sign_up: "Sign up"
+  login: "Login"
+  profile:
+    title: "'s Profile"
+    email: "Email"
+    edit_profile: "Edit Profile"
+    published_articles: "Published Articles"
+    pending_comments: "Pending Comments"
+    article: "Article"
+    approve: "Approve"
+    reject: "Reject"
+  welcome: "Welcome DeveL∞Pers"
+  see_articles: "You can see %{count} published article(s)"
+  here: "here"
+  add_new_article: "Add new article"
+  my_profile: "My Profile"
+  published_articles: "Published Articles"
+  edit_profile:
+    title: "Edit Profile"
+    update_profile: "Update Profile"
+    back_to_profile: "Back to Profile"
+    error: "error"
+    prohibited: "prohibited this profile from being saved:"
+    nickname: "Nickname"
   hello: "Hello world"
+  articles:
+    title: "Title"
+    publisher: "Publisher"
+    content: "Content"
+    published: "Published"
+    vote_count: "Vote Count"
+    add_vote: "Add vote"
+    remove_vote: "Remove vote"
+    edit: "Edit"
+    destroy: "Destroy this article"
+    comments: "Comments"
+    commenter: "Commenter"
+    body: "Body"
+    tags: "Tags"
+    is_published: "Is published"
+    edit_article: "Edit this article"
+    delete_article: "Delete this article"
+    new_article: "New article"
+    back_to_articles: "Back to articles"
+    content_placeholder: "Content will be here"
+    created_at: "Created at "
+    create_article: "Create article"
+    show_this_article: "Show this article"
+    article: "Article"
+    editing_article: "Makaleyi Düzenleme"
+    error: "error"
+    prohibited: "prohibited this article from being saved:"
+    new_tags_placeholder: "Enter new tags separated by commas"

@@ -1,80 +1,79 @@
 <div id="<%= dom_id @article %>">
   <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.title') %>:</strong>
     <%= @article.title %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Publisher:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.publisher') %>:</strong>
     <%= @article.user.nickname %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.content') %>:</strong>
     <%= @article.content %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Is published:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.is_published') %>:</strong>
     <%= @article.published %>
   </p>
 
   <div>
-    <h2 class="font-bold text-2xl">Tags</h2>
+    <h2 class="font-bold text-2xl"><%= t('articles.tags') %></h2>
     <% @article.tags.each do |tag| %>
       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#<%= tag.name %></span>
     <% end %>
   </div>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Vote Count:</strong>
+    <strong class="block font-medium mb-1"><%= t('articles.vote_count') %>:</strong>
     <%= @article.vote_count %>
 
-    <%= button_to "Add vote", add_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
+    <%= button_to t('articles.add_vote'), add_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-green-600 text-white block mr-5" %>
     <% unless @article.vote_count.zero? %>
-      <%= button_to "Remove vote", remove_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
+      <%= button_to t('articles.remove_vote'), remove_vote_article_path(@article), method: :post, class: "rounded-lg py-3 px-5 bg-red-600 text-white block" %>
     <% end %>
   </p>
 
   <div class="inline-block ml-2">
     <% if @article.user == current_user %>
-      <%= link_to "Edit", edit_article_path(@article), class: "ml-2 rounded-lg py-3 px-5 bg-yellow-600 text-white inline-block font-medium" %>
-      <%= button_to "Destroy this article", @article, method: :delete, class: "bg-red-200 text-red-500 mt-2 rounded-lg py-3 px-5 font-medium" %>
+      <%= link_to t('articles.edit'), edit_article_path(@article), class: "ml-2 rounded-lg py-3 px-5 bg-yellow-600 text-white inline-block font-medium" %>
+      <%= button_to t('articles.destroy'), @article, method: :delete, class: "bg-red-200 text-red-500 mt-2 rounded-lg py-3 px-5 font-medium" %>
     <% end %>
   </div>
 
   <hr>
 
   <div>
-  <h2 class="font-bold text-2xl">Comments (<%= @article.comments.approved.count %>)</h2>
-  <% @article.comments.each do |comment| %>
-    <% if comment.user == current_user || current_user == @article.user || comment.state == "approved" %>
-    <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow relative">
-    <div class="absolute top-0 right-0 p-2 bg-gray-100 rounded-bl-lg text-sm font-semibold text-gray-700">
-      <%= comment.state.capitalize %>
-    </div>
-    <p class="my-5">
-      <strong class="block font-medium mb-1">Commenter:</strong>
-      <%= comment.user.nickname %>
-    </p>
-    <p class="my-5">
-      <strong class="block font-medium mb-1">Body:</strong>
-      <%= comment.body %>
-    </p>
-  </div>
-  
+    <h2 class="font-bold text-2xl"><%= t('articles.comments') %> (<%= @article.comments.approved.count %>)</h2>
+    <% @article.comments.each do |comment| %>
+      <% if comment.user == current_user || current_user == @article.user || comment.state == "approved" %>
+        <div class="mt-5 max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow relative">
+          <div class="absolute top-0 right-0 p-2 bg-gray-100 rounded-bl-lg text-sm font-semibold text-gray-700">
+            <%= comment.state.capitalize %>
+          </div>
+          <p class="my-5">
+            <strong class="block font-medium mb-1"><%= t('articles.commenter') %>:</strong>
+            <%= comment.user.nickname %>
+          </p>
+          <p class="my-5">
+            <strong class="block font-medium mb-1"><%= t('articles.body') %>:</strong>
+            <%= comment.body %>
+          </p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
 
- <%= form_with(model: [ @article, @comment ], class: "mt-5") do |form| %>
-  <%= form.hidden_field :commenter, value: current_user.nickname %>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body, rows: 4 %>
-  </p>
-  <p>
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </p>
-<% end %>
+    <%= form_with(model: [ @article, @comment ], class: "mt-5") do |form| %>
+      <%= form.hidden_field :commenter, value: current_user&.nickname %>
+      <p>
+        <%= form.label :body %><br>
+        <%= form.text_area :body, rows: 4 %>
+      </p>
+      <p>
+        <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      </p>
+    <% end %>
+  </div>
 </div>
-

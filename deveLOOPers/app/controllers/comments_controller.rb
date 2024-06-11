@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   
     def reject
       if current_user == @article.user
-        @comment.destroy
+        @comment.update(state: 'rejected')
         redirect_to user_profile_path(current_user), notice: 'Comment was rejected.'
       else
         redirect_to user_profile_path(current_user), alert: 'Not authorized to reject this comment.'
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
 
     def show
         @comment = @article.comments.find(params[:id])
-        if @comment.written_by?(current_user) || (@comment.state == "pending" && current_user == @article.user)
+        if @comment.written_by?(current_user) || (@comment.state == "pending" && current_user == @article.user) || current_user == @article.user
           render :show
         else
           redirect_to root_path, alert: "You are not authorized to view this comment."

@@ -1,0 +1,65 @@
+tr:
+  logged_in_as: "Giriş yapıldı: "
+  logout: "Çıkış yap"
+  sign_up: "Kayıt ol"
+  login: "Giriş yap"
+  profile:
+    title: "'ın profili"
+    email: "Email"
+    edit_profile: "Profili Düzenle"
+    published_articles: "Yayınlanan Makaleler"
+    pending_comments: "Bekleyen Yorumlar"
+    article: "Makale"
+    approve: "Onayla"
+    reject: "Reddet"
+  welcome: "DeveL∞Pers'a Hoş geldiniz "
+  see_articles: "%{count} yayınlanmış makaleyi görmek için"
+  here: "tıklayın"
+  add_new_article: "Yeni makale ekle"
+  my_profile: "Profilim"
+  published_articles: "Yayınlanmış Makaleler"
+  date:
+    day_names: 
+      sunday: Pazar
+      monday: Pazartesi
+      tuesday: Salı
+      wednesday: Çarşamba
+      thursday: Perşembe
+      friday: Cuma
+      saturday: Cumartesi
+  hello: "Merhaba dünya"
+  edit_profile:
+    title: "Profili Düzenle"
+    update_profile: "Profili Güncelle"
+    back_to_profile: "Profiline Geri Dön"
+    error: "hata"
+    prohibited: "bu profili kaydedilmesini engelledi:"
+    nickname: "Takma Ad"
+  articles:
+    title: "Başlık"
+    publisher: "Yayıncı"
+    content: "İçerik"
+    published: "Yayınlandı"
+    vote_count: "Oy Sayısı"
+    add_vote: "Oy ekle"
+    remove_vote: "Oyu kaldır"
+    edit: "Düzenle"
+    destroy: "Bu makaleyi sil"
+    comments: "Yorumlar"
+    commenter: "Yorumcu"
+    body: "Yorum"
+    tags: "Etiketler"
+    is_published: "Yayın durumu"
+    edit_article: "Bu makaleyi düzenle"
+    delete_article: "Bu makaleyi sil"
+    new_article: "Yeni makale"
+    back_to_articles: "Makalelere geri dön"
+    content_placeholder: "İçerik buraya gelecek"
+    show_this_article: "Bu makaleyi göster"
+    article: "Makale"
+    created_at: "Oluşturulma tarihi "
+    create_article: "Makale oluştur"
+    editing_article: "Makaleyi Düzenleme"
+    error: "hata"
+    prohibited: "bu makalenin kaydedilmesini engelledi:"
+    new_tags_placeholder: "Etiketleri virgülle ayırarak girin"
