@@ -13,14 +13,19 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
 
-      unless user
-       user = User.create(
-           email: data['email'],
-           password: Devise.friendly_token[0,20]
-        )
-      end
+    unless user
+      user = User.create(
+        email: data['email'],
+        password: Devise.friendly_token[0, 20],
+        nickname: data['nickname'] || data['email'].split('@').first
+      )
+    else
+      user.update(
+        nickname: user.nickname || data['nickname'] || data['email'].split('@').first
+      )
+    end
     user
-end
+  end
 
   private
 
