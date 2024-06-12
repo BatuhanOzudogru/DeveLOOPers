@@ -2,9 +2,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[github]
 
-  before_validation :set_nickname, on: :create
+  #before_validation :set_nickname, on: :create
 
-  validates :nickname, presence: true, uniqueness: true
+  #validates :nickname, presence: true, uniqueness: true
 
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
