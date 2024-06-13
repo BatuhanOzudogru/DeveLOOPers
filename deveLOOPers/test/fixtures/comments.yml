@@ -1,11 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  commenter: MyString
-  body: MyText
+  body: "This is a comment."
+  commenter: "Commenter One"
+  state: "approved"
   article: one
+  user: one
 
 two:
-  commenter: MyString
-  body: MyText
-  article: two
+  body: "This is another comment."
+  commenter: "Commenter Two"
+  state: "pending"
+  article: one
+  user: one

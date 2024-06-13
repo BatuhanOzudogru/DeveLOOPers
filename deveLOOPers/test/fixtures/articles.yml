@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  content: MyText
-  status: 1
+  title: "Sample Title"
+  content: "Sample content for testing"
+  published: true
+  user: one
 
 two:
-  title: MyString
-  content: MyText
-  status: 1
+  title: "Another Title"
+  content: "Another content for testing"
+  published: false
+  user: two

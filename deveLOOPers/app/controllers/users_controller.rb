@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show
-    @user = User.find_by(nickname: params[:nickname])
-    @pending_comments = Comment.joins(article: :user).where(users: { id: @user.id }, comments: { state: 'pending' })
-    @published_articles = @user.articles.published
-
     if @user
+      @pending_comments = Comment.joins(article: :user).where(users: { id: @user.id }, comments: { state: 'pending' })
+      @published_articles = @user.articles.published
       @articles = @user.articles
     else
       redirect_to root_path, alert: "User not found"
@@ -42,5 +40,4 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: "You are not authorized to perform this action."
     end
   end
-
 end

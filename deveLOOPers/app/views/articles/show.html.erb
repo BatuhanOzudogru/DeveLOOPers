@@ -64,16 +64,17 @@
         </div>
       <% end %>
     <% end %>
-
-    <%= form_with(model: [ @article, @comment ], class: "mt-5") do |form| %>
-      <%= form.hidden_field :commenter, value: current_user&.nickname %>
-      <p>
-        <%= form.label :body %><br>
-        <%= form.text_area :body, rows: 4 %>
-      </p>
-      <p>
-        <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-      </p>
+      <% if user_signed_in? %>
+        <%= form_with(model: [ @article, @comment ], class: "mt-5") do |form| %>
+         <%= form.hidden_field :commenter, value: current_user&.nickname %>
+          <p>
+           <%= form.label :body %><br>
+           <%= form.text_area :body, rows: 4 %>
+          </p>
+          <p>
+           <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+          </p>
+      <% end %>
     <% end %>
   </div>
 </div>
