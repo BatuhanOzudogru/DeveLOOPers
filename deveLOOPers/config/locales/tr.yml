@@ -1,4 +1,5 @@
 tr:
+  sign_in_with_github: "GitHub ile giriş yap"
   logged_in_as: "Giriş yapıldı: "
   logout: "Çıkış yap"
   sign_up: "Kayıt ol"
@@ -63,3 +64,5 @@ tr:
     error: "hata"
     prohibited: "bu makalenin kaydedilmesini engelledi:"
     new_tags_placeholder: "Etiketleri virgülle ayırarak girin"
+    search_placeholder: "Makale Ara"
+    search_button: "Ara"

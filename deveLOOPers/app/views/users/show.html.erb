@@ -2,11 +2,7 @@
   <h1 class="text-3xl font-bold mb-4"><%= @user.nickname %> <%= t('profile.title') %></h1>
   <p class="text-lg mb-6"><%= t('profile.email') %>: <%= @user.email %></p>
 
-  <% if user_signed_in? && current_user == @user %>
-    <div class="text-center">
-      <%= link_to t('profile.edit_profile'), edit_user_profile_path(current_user.nickname), class: "btn btn-primary inline-block rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
-    </div>
-  <% end %>
+  
 
   <h2 class="text-2xl font-semibold mb-4"><%= t('profile.published_articles') %></h2>
   <ul class="mt-5 space-y-2">

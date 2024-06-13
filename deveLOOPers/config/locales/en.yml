@@ -1,4 +1,5 @@
 en:
+  sign_in_with_github: "Sign in with GitHub"
   logged_in_as: "Logged in as"
   logout: "Logout"
   sign_up: "Sign up"
@@ -54,3 +55,5 @@ en:
     error: "error"
     prohibited: "prohibited this article from being saved:"
     new_tags_placeholder: "Enter new tags separated by commas"
+    search_placeholder: "Search Articles"
+    search_button: "Search"

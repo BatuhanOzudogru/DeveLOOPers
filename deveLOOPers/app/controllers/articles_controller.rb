@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :add_vote, :remove_vote]
   before_action :authorize_user, only: [:edit, :update, :destroy]
   def index
-    @articles = Article.published.order(created_at: :asc)
+    @articles = Article.search(params[:query])
   end
 
   def show
@@ -77,6 +77,21 @@ class ArticlesController < ApplicationController
     @article.save
 
     redirect_to @article
+  end
+
+  def search
+    @query = params[:query]
+    @articles = if @query.present?
+                  if @query.start_with?('tag:')
+                    tag_name = @query.split(':').last
+                    Article.joins(:tags).where(tags: { name: tag_name }).distinct
+                  else
+                    Article.published.where('title LIKE ? OR content LIKE ?', "%#{@query}%", "%#{@query}%")
+                  end
+                else
+                  Article.published
+                end
+    render :index
   end
 
   private
