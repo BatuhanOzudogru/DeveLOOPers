@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  
+  namespace :api do
+    resources :articles, only: [:index, :show]
+  end
 
   
   get '/users/:nickname', to: 'users#show', as: 'user_profile'
